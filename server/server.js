@@ -20,7 +20,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend is running!' });
 });
 
-app.use(petRouter);
+app.use('/api', petRouter);
 app.use('/form', AdoptFormRoute);
 app.use('/admin', AdminRoute);
 
