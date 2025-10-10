@@ -9,22 +9,25 @@ const Pets = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await fetch("/api/pets")
+        // Fetch from backend API
+        // Use full URL if frontend is served from different origin
+        // const response = await fetch("http://16.171.160.67/api/allPets");
+        const response = await fetch("/api/allPets");
 
         if (!response.ok) {
-          throw new Error('An error occurred')
+          throw new Error("An error occurred while fetching pets");
         }
-        const data = await response.json()
-        setPetsData(data)
+        const data = await response.json();
+        setPetsData(data);
       } catch (error) {
-        console.log(error)
+        console.error(error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
     fetchRequests();
-  }, [])
+  }, []);
 
   const filteredPets = petsData.filter((pet) => {
     if (filter === "all") {
@@ -36,10 +39,7 @@ const Pets = () => {
   return (
     <>
       <div className="filter-selection">
-        <select
-          value={filter}
-          onChange={(event) => setFilter(event.target.value)}
-        >
+        <select value={filter} onChange={(event) => setFilter(event.target.value)}>
           <option value="all">All Pets</option>
           <option value="Dog">Dogs</option>
           <option value="Cat">Cats</option>
@@ -49,17 +49,17 @@ const Pets = () => {
           <option value="Other">Other</option>
         </select>
       </div>
+
       <div className="pet-container">
-        {loading ?
-          <p>Loading</p> : ((filteredPets.length > 0 ) ? (
-            filteredPets.map((petDetail, index) => (
-              <PetsViewer pet={petDetail} key={index} />
-            ))
-          ) : (
-            <p className="oops-msg">Oops!... No pets available</p>
-          )
-          )
-        }
+        {loading ? (
+          <p>Loading...</p>
+        ) : filteredPets.length > 0 ? (
+          filteredPets.map((petDetail, index) => (
+            <PetsViewer pet={petDetail} key={index} />
+          ))
+        ) : (
+          <p className="oops-msg">Oops!... No pets available</p>
+        )}
       </div>
     </>
   );
