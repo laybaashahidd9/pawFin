@@ -1,5 +1,6 @@
-import React from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Auth from "./Components/Auth/Auth";
 import Navbar from "./Components/NavBar/Navbar";
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Footer/Footer";
@@ -9,6 +10,7 @@ import Pets from "./Components/Pets/Pets";
 import AdoptForm from "./Components/AdoptForm/AdoptForm";
 import AdminLogin from "./Components/AdminPanel/AdminLogin";
 import "./App.css";
+
 
 const Layout = ({ children }) => (
   <>
@@ -38,6 +40,15 @@ const App = () => {
             </Layout>
           } 
         />
+        <Route 
+          path="/login" 
+          element={
+            <Layout>
+              <Auth />
+            </Layout>
+          } 
+        />
+
         <Route 
           path="/contact" 
           element={
