@@ -20,19 +20,6 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend is running!' });
 });
 
-<<<<<<< HEAD
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => {
-        console.log('Connected to DB');
-        const PORT = 4000;
-        app.listen(PORT, () => {
-            console.log(`Listening on port ${PORT}`)
-        })
-    })
-    .catch((err) => {
-        console.error(err);
-    })
-=======
 
 
 app.use('/api', petRouter);
@@ -43,7 +30,7 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('Connected to DB');
     const PORT = 4000;
-    app.listen(4000, '0.0.0.0', () => {
+    app.listen(4000,  () => {
   console.log("Server running on port 4000");
 });
 
@@ -51,4 +38,3 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => {
     console.error(err);
   });
->>>>>>> 90c0498442eac5c43f9623bd59fe200d3c0a17a9
