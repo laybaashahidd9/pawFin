@@ -10,19 +10,16 @@ const Pets = () => {
     const fetchRequests = async () => {
       try {
         // Fetch from backend API
-        // Use full URL if frontend is served from different origin
-        // const response = await fetch("http://16.171.160.67/api/allPets");
-        const response = await fetch("/api/allPets");
-        console.log("Fetched pets:", data);
-
-
+        const response = await fetch("http://localhost:4000/api/allPets");
+        
         if (!response.ok) {
           throw new Error("An error occurred while fetching pets");
         }
         const data = await response.json();
+        console.log("Fetched pets:", data);
         setPetsData(data);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching pets:", error);
       } finally {
         setLoading(false);
       }
