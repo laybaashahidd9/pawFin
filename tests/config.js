@@ -11,14 +11,15 @@ class TestConfig {
   async getDriver() {
     const options = new chrome.Options();
     
-    // Configure Chrome for Windows
-    // Comment out headless for debugging, uncomment for CI/CD
-    // options.addArguments('--headless');
+    // Headless disabled for Windows (localhost connectivity issues)
+    // Enable only in Docker/Linux environments
     options.addArguments('--no-sandbox');
     options.addArguments('--disable-dev-shm-usage');
     options.addArguments('--disable-gpu');
     options.addArguments('--window-size=1920,1080');
     options.addArguments('--disable-extensions');
+    options.addArguments('--disable-web-security');
+    options.addArguments('--allow-insecure-localhost');
 
     const driver = await new Builder()
       .forBrowser('chrome')
