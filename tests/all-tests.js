@@ -12,10 +12,12 @@ describe('PawFinds - Complete Test Suite', function() {
 
   before(async function() {
     const options = new chrome.Options();
-    // options.addArguments('--headless'); // Uncomment for headless mode
+    options.addArguments('--headless');
     options.addArguments('--no-sandbox');
     options.addArguments('--disable-dev-shm-usage');
     options.addArguments('--disable-gpu');
+    options.addArguments('--single-process');
+    options.addArguments('--disable-extensions');
     options.addArguments('--window-size=1920,1080');
 
     driver = await new Builder()
