@@ -81,11 +81,11 @@ pipeline {
     </div>
 </body>
 </html>""",
-                to: "${env.GIT_COMMITTER_EMAIL},qasimalik@gmail.com",
+                to: "${env.GIT_COMMITTER_EMAIL},qasimalik@gmail.com,laybaashahidd@gmail.com",
                 mimeType: 'text/html'
             )
             
-            echo "Email sent to: ${env.GIT_COMMITTER_EMAIL}, qasimalik@gmail.com"
+            echo "Email sent to: ${env.GIT_COMMITTER_EMAIL}, qasimalik@gmail.com, laybaashahidd@gmail.com"
         }
         
         success {
