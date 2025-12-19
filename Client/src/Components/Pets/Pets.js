@@ -10,7 +10,7 @@ const Pets = () => {
     const fetchRequests = async () => {
       try {
         // Fetch from backend API
-        const response = await fetch("http://localhost:4000/api/allPets");
+        const response = await fetch("/api/allPets");
         
         if (!response.ok) {
           throw new Error("An error occurred while fetching pets");
