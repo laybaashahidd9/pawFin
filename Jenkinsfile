@@ -40,5 +40,34 @@ pipeline {
         always {
             sh 'docker rmi pawfin-selenium-tests || true'
         }
+        success {
+            emailext (
+                subject: "✅ SUCCESS: PawFinds Tests - Build #${env.BUILD_NUMBER}",
+                body: """
+                    <h2>Build Successful!</h2>
+                    <p><b>Job:</b> ${env.JOB_NAME}</p>
+                    <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+                    <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    <p><b>Status:</b> All 10 Selenium tests passed!</p>
+                    <p><b>Application URL:</b> ${APP_URL}</p>
+                """,
+                mimeType: 'text/html',
+                to: "${env.GIT_AUTHOR_EMAIL}"
+            )
+        }
+        failure {
+            emailext (
+                subject: "❌ FAILED: PawFinds Tests - Build #${env.BUILD_NUMBER}",
+                body: """
+                    <h2>Build Failed!</h2>
+                    <p><b>Job:</b> ${env.JOB_NAME}</p>
+                    <p><b>Build Number:</b> ${env.BUILD_NUMBER}</p>
+                    <p><b>Build URL:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                    <p><b>Please check the console output for details.</b></p>
+                """,
+                mimeType: 'text/html',
+                to: "${env.GIT_AUTHOR_EMAIL}"
+            )
+        }
     }
 }
